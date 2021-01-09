@@ -7,7 +7,7 @@ function Header() {
     <nav id="header-nav">
       <div className="container">
         <Link
-          to="/home"
+          to="/To-Do-List"
           id="header-logo"
         >
             Home

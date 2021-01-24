@@ -36,7 +36,7 @@ function App() {
     );
   };
 
-  const addTarefa = (texto) => {
+  const adicTarefa = (texto) => {
     const novoId = ultimoId + 1;
     setTarefas([
       ...tarefas,
@@ -64,7 +64,7 @@ function App() {
           <Redirect to="/To-Do-List" />
         </Route>
         <Route path="/Nova-Tarefa">
-          <AddTarefa />
+          <AddTarefa adicTarefa={adicTarefa}/>
         </Route>
       </Switch>
     </Router>

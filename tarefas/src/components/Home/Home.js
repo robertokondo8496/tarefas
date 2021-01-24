@@ -1,38 +1,29 @@
-import {
-    NavLink,
-    Redirect,
-    Route,
-    Switch,
-    useRouteMatch
-  } from 'react-router-dom';
-  
   import './Home.css';
-  import TarefaList from '../TarefaList/TarefaList';
   
-  function Home() {
-  
-    const routeMatch = useRouteMatch();
-  
+  function Home({tarefas, setTarefa, deleteTarefa}) {
     return (
-      <>
-        <div className="container row sm-vertical">
-          <div className="col sm-full">
-            <main>
-              <Switch>
-                <Route path={`${routeMatch.path}/To-Do-List`}>
-                  <TarefaList />
-                </Route>
-                <Route path={`${routeMatch.path}/Nova-Tarefa`}>
-                  <TarefaList />
-                </Route>
-                <Route path={`${routeMatch.path}/`}>
-                  <Redirect to={`${routeMatch.path}/To-Do-List`} />
-                </Route>
-              </Switch>
-            </main>
-          </div>
+      tarefas.map(tarefa => (
+        <div key={tarefa.id}>
+          <input
+            id={`completada_${tarefa.id}`}
+            type="checkbox"
+            onChange={event => setTarefa(tarefa, event.target.checked)}
+            value={tarefa.completada}
+            defaultChecked={tarefa.completada}
+          />
+          <label htmlFor={`completada_${tarefa.id}`}>
+            { tarefa.texto }
+          </label>
+          { tarefa.completada && (
+            <button
+              type="button"
+              onClick={event => deleteTarefa(tarefa)}
+            >
+              Excluir
+            </button>
+          ) }
         </div>
-      </>
+      ))
     );
   }
   

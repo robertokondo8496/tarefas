@@ -1,15 +1,20 @@
 import './AddTarefa.css';
+import { useState } from "react";
 
-function AddTarefa() {
-  return (
+function AddTarefa({adicTarefa}) {
+    
+    const [ texto, setTexto ] = useState();
+
+    const handleTextoChange = (event) => {
+      adicTarefa(texto);
+      setTexto('');
+    }    
+    
+    return (
     <div>
-        <form>
-            <label>
-                Nova tarefa... <br/>
-                <input type="text" name="novaTarefa" placeholder="Tarefa.."/><br/>
-            </label>
-            <input type="submit" value="Adicionar"/>
-        </form>
+        Digite sua tarefa: <br/>
+        <textarea value={texto} onChange={event => setTexto(event.target.value)}/><br/>
+        <button onClick={handleTextoChange}> Adicionar </button>
     </div>
   );
 }
